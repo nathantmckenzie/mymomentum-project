@@ -29,7 +29,9 @@ To get the project up and running, do the following:
 
 ## Development
 
-For the most part, you should just be able to work in React. Here's a quick overview of what you might want to look at:
+For the most part, you should just be able to work in React. Here's a quick overview of what you might want to look at the following YouTube video:
+
+https://www.youtube.com/embed/_6r900fmMGI
 
 <!-- blank line -->
 <figure class="video_container">
@@ -38,6 +40,8 @@ For the most part, you should just be able to work in React. Here's a quick over
 <!-- blank line -->
 
 If, however, you're feeling more adventurous, take a look at the following video and use the commands below.
+
+https://www.youtube.com/embed/-6yJGwgKCEI
 
 <!-- blank line -->
 <figure class="video_container">
