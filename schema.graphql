@@ -6,8 +6,34 @@ schema {
     subscription: subscription_root
 }
 
+"columns and relationships of \"comments\""
+type comments {
+    comment: String!
+    created_at: timestamptz
+    id: uuid!
+    "An object relationship"
+    todo: todo
+    todo_id: uuid
+    updated_at: timestamptz
+}
+
+"response of any mutation on the table \"comments\""
+type comments_mutation_response {
+    "number of affected rows by the mutation"
+    affected_rows: Int!
+    "data of the affected rows by the mutation"
+    returning: [comments!]!
+}
+
 "mutation root"
 type mutation_root {
+    "delete data from the table: \"comments\""
+    delete_comments(
+        "filter the rows which have to be deleted"
+        where: comments_bool_exp!
+    ): comments_mutation_response
+    "delete single row from the table: \"comments\""
+    delete_comments_by_pk(id: uuid!): comments
     "delete data from the table: \"todo\""
     delete_todo(
         "filter the rows which have to be deleted"
@@ -15,6 +41,20 @@ type mutation_root {
     ): todo_mutation_response
     "delete single row from the table: \"todo\""
     delete_todo_by_pk(id: uuid!): todo
+    "insert data into the table: \"comments\""
+    insert_comments(
+        "the rows to be inserted"
+        objects: [comments_insert_input!]!,
+        "on conflict condition"
+        on_conflict: comments_on_conflict
+    ): comments_mutation_response
+    "insert a single row into the table: \"comments\""
+    insert_comments_one(
+        "the row to be inserted"
+        object: comments_insert_input!,
+        "on conflict condition"
+        on_conflict: comments_on_conflict
+    ): comments
     "insert data into the table: \"todo\""
     insert_todo(
         "the rows to be inserted"
@@ -29,6 +69,19 @@ type mutation_root {
         "on conflict condition"
         on_conflict: todo_on_conflict
     ): todo
+    "update data of the table: \"comments\""
+    update_comments(
+        "sets the columns of the filtered rows to the given values"
+        _set: comments_set_input,
+        "filter the rows which have to be updated"
+        where: comments_bool_exp!
+    ): comments_mutation_response
+    "update single row of the table: \"comments\""
+    update_comments_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: comments_set_input,
+        pk_columns: comments_pk_columns_input!
+    ): comments
     "update data of the table: \"todo\""
     update_todo(
         "sets the columns of the filtered rows to the given values"
@@ -46,6 +99,21 @@ type mutation_root {
 
 "query root"
 type query_root {
+    "fetch data from the table: \"comments\""
+    comments(
+        "distinct select on columns"
+        distinct_on: [comments_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [comments_order_by!],
+        "filter the rows returned"
+        where: comments_bool_exp
+    ): [comments!]!
+    "fetch data from the table: \"comments\" using primary key columns"
+    comments_by_pk(id: uuid!): comments
     "fetch data from the table: \"todo\""
     todo(
         "distinct select on columns"
@@ -65,6 +133,21 @@ type query_root {
 
 "subscription root"
 type subscription_root {
+    "fetch data from the table: \"comments\""
+    comments(
+        "distinct select on columns"
+        distinct_on: [comments_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [comments_order_by!],
+        "filter the rows returned"
+        where: comments_bool_exp
+    ): [comments!]!
+    "fetch data from the table: \"comments\" using primary key columns"
+    comments_by_pk(id: uuid!): comments
     "fetch data from the table: \"todo\""
     todo(
         "distinct select on columns"
@@ -84,6 +167,19 @@ type subscription_root {
 
 "columns and relationships of \"todo\""
 type todo {
+    "An array relationship"
+    comments(
+        "distinct select on columns"
+        distinct_on: [comments_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [comments_order_by!],
+        "filter the rows returned"
+        where: comments_bool_exp
+    ): [comments!]!
     complete: Boolean
     created_at: timestamptz!
     description: String
@@ -98,6 +194,36 @@ type todo_mutation_response {
     affected_rows: Int!
     "data of the affected rows by the mutation"
     returning: [todo!]!
+}
+
+"unique or primary key constraints on table \"comments\""
+enum comments_constraint {
+    "unique or primary key constraint"
+    comments_pkey
+}
+
+"select columns of table \"comments\""
+enum comments_select_column {
+    "column name"
+    comment
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    todo_id
+    "column name"
+    updated_at
+}
+
+"update columns of table \"comments\""
+enum comments_update_column {
+    "column name"
+    comment
+    "column name"
+    id
+    "column name"
+    todo_id
 }
 
 "column ordering options"
@@ -182,6 +308,70 @@ input String_comparison_exp {
     _similar: String
 }
 
+"input type for inserting array relation for remote table \"comments\""
+input comments_arr_rel_insert_input {
+    data: [comments_insert_input!]!
+    on_conflict: comments_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"comments\". All fields are combined with a logical 'AND'."
+input comments_bool_exp {
+    _and: [comments_bool_exp]
+    _not: comments_bool_exp
+    _or: [comments_bool_exp]
+    comment: String_comparison_exp
+    created_at: timestamptz_comparison_exp
+    id: uuid_comparison_exp
+    todo: todo_bool_exp
+    todo_id: uuid_comparison_exp
+    updated_at: timestamptz_comparison_exp
+}
+
+"input type for inserting data into table \"comments\""
+input comments_insert_input {
+    comment: String
+    created_at: timestamptz
+    id: uuid
+    todo: todo_obj_rel_insert_input
+    todo_id: uuid
+    updated_at: timestamptz
+}
+
+"input type for inserting object relation for remote table \"comments\""
+input comments_obj_rel_insert_input {
+    data: comments_insert_input!
+    on_conflict: comments_on_conflict
+}
+
+"on conflict condition type for table \"comments\""
+input comments_on_conflict {
+    constraint: comments_constraint!
+    update_columns: [comments_update_column!]!
+    where: comments_bool_exp
+}
+
+"ordering options when selecting data from \"comments\""
+input comments_order_by {
+    comment: order_by
+    created_at: order_by
+    id: order_by
+    todo: todo_order_by
+    todo_id: order_by
+    updated_at: order_by
+}
+
+"primary key columns input for table: \"comments\""
+input comments_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"comments\""
+input comments_set_input {
+    comment: String
+    id: uuid
+    todo_id: uuid
+}
+
 "expression to compare columns of type timestamptz. All fields are combined with logical 'AND'."
 input timestamptz_comparison_exp {
     _eq: timestamptz
@@ -206,6 +396,7 @@ input todo_bool_exp {
     _and: [todo_bool_exp]
     _not: todo_bool_exp
     _or: [todo_bool_exp]
+    comments: comments_bool_exp
     complete: Boolean_comparison_exp
     created_at: timestamptz_comparison_exp
     description: String_comparison_exp
@@ -216,6 +407,7 @@ input todo_bool_exp {
 
 "input type for inserting data into table \"todo\""
 input todo_insert_input {
+    comments: comments_arr_rel_insert_input
     complete: Boolean
     description: String
     id: uuid

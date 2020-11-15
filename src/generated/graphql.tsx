@@ -46,21 +46,160 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
+/** columns and relationships of "comments" */
+export type Comments = {
+  __typename?: 'comments';
+  comment: Scalars['String'];
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id: Scalars['uuid'];
+  /** An object relationship */
+  todo?: Maybe<Todo>;
+  todo_id?: Maybe<Scalars['uuid']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** input type for inserting array relation for remote table "comments" */
+export type Comments_Arr_Rel_Insert_Input = {
+  data: Array<Comments_Insert_Input>;
+  on_conflict?: Maybe<Comments_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "comments". All fields are combined with a logical 'AND'. */
+export type Comments_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
+  _not?: Maybe<Comments_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
+  comment?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Uuid_Comparison_Exp>;
+  todo?: Maybe<Todo_Bool_Exp>;
+  todo_id?: Maybe<Uuid_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "comments" */
+export enum Comments_Constraint {
+  /** unique or primary key constraint */
+  CommentsPkey = 'comments_pkey'
+}
+
+/** input type for inserting data into table "comments" */
+export type Comments_Insert_Input = {
+  comment?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  todo?: Maybe<Todo_Obj_Rel_Insert_Input>;
+  todo_id?: Maybe<Scalars['uuid']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "comments" */
+export type Comments_Mutation_Response = {
+  __typename?: 'comments_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Comments>;
+};
+
+/** input type for inserting object relation for remote table "comments" */
+export type Comments_Obj_Rel_Insert_Input = {
+  data: Comments_Insert_Input;
+  on_conflict?: Maybe<Comments_On_Conflict>;
+};
+
+/** on conflict condition type for table "comments" */
+export type Comments_On_Conflict = {
+  constraint: Comments_Constraint;
+  update_columns: Array<Comments_Update_Column>;
+  where?: Maybe<Comments_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "comments" */
+export type Comments_Order_By = {
+  comment?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  todo?: Maybe<Todo_Order_By>;
+  todo_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "comments" */
+export type Comments_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "comments" */
+export enum Comments_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  TodoId = 'todo_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "comments" */
+export type Comments_Set_Input = {
+  comment?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  todo_id?: Maybe<Scalars['uuid']>;
+};
+
+/** update columns of table "comments" */
+export enum Comments_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  TodoId = 'todo_id'
+}
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "comments" */
+  delete_comments?: Maybe<Comments_Mutation_Response>;
+  /** delete single row from the table: "comments" */
+  delete_comments_by_pk?: Maybe<Comments>;
   /** delete data from the table: "todo" */
   delete_todo?: Maybe<Todo_Mutation_Response>;
   /** delete single row from the table: "todo" */
   delete_todo_by_pk?: Maybe<Todo>;
+  /** insert data into the table: "comments" */
+  insert_comments?: Maybe<Comments_Mutation_Response>;
+  /** insert a single row into the table: "comments" */
+  insert_comments_one?: Maybe<Comments>;
   /** insert data into the table: "todo" */
   insert_todo?: Maybe<Todo_Mutation_Response>;
   /** insert a single row into the table: "todo" */
   insert_todo_one?: Maybe<Todo>;
+  /** update data of the table: "comments" */
+  update_comments?: Maybe<Comments_Mutation_Response>;
+  /** update single row of the table: "comments" */
+  update_comments_by_pk?: Maybe<Comments>;
   /** update data of the table: "todo" */
   update_todo?: Maybe<Todo_Mutation_Response>;
   /** update single row of the table: "todo" */
   update_todo_by_pk?: Maybe<Todo>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CommentsArgs = {
+  where: Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Comments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -77,6 +216,20 @@ export type Mutation_RootDelete_Todo_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_CommentsArgs = {
+  objects: Array<Comments_Insert_Input>;
+  on_conflict?: Maybe<Comments_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Comments_OneArgs = {
+  object: Comments_Insert_Input;
+  on_conflict?: Maybe<Comments_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_TodoArgs = {
   objects: Array<Todo_Insert_Input>;
   on_conflict?: Maybe<Todo_On_Conflict>;
@@ -87,6 +240,20 @@ export type Mutation_RootInsert_TodoArgs = {
 export type Mutation_RootInsert_Todo_OneArgs = {
   object: Todo_Insert_Input;
   on_conflict?: Maybe<Todo_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CommentsArgs = {
+  _set?: Maybe<Comments_Set_Input>;
+  where: Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Comments_By_PkArgs = {
+  _set?: Maybe<Comments_Set_Input>;
+  pk_columns: Comments_Pk_Columns_Input;
 };
 
 
@@ -122,10 +289,30 @@ export enum Order_By {
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "comments" */
+  comments: Array<Comments>;
+  /** fetch data from the table: "comments" using primary key columns */
+  comments_by_pk?: Maybe<Comments>;
   /** fetch data from the table: "todo" */
   todo: Array<Todo>;
   /** fetch data from the table: "todo" using primary key columns */
   todo_by_pk?: Maybe<Todo>;
+};
+
+
+/** query root */
+export type Query_RootCommentsArgs = {
+  distinct_on?: Maybe<Array<Comments_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Comments_Order_By>>;
+  where?: Maybe<Comments_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootComments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -147,10 +334,30 @@ export type Query_RootTodo_By_PkArgs = {
 /** subscription root */
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "comments" */
+  comments: Array<Comments>;
+  /** fetch data from the table: "comments" using primary key columns */
+  comments_by_pk?: Maybe<Comments>;
   /** fetch data from the table: "todo" */
   todo: Array<Todo>;
   /** fetch data from the table: "todo" using primary key columns */
   todo_by_pk?: Maybe<Todo>;
+};
+
+
+/** subscription root */
+export type Subscription_RootCommentsArgs = {
+  distinct_on?: Maybe<Array<Comments_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Comments_Order_By>>;
+  where?: Maybe<Comments_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootComments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -186,12 +393,24 @@ export type Timestamptz_Comparison_Exp = {
 /** columns and relationships of "todo" */
 export type Todo = {
   __typename?: 'todo';
+  /** An array relationship */
+  comments: Array<Comments>;
   complete?: Maybe<Scalars['Boolean']>;
   created_at: Scalars['timestamptz'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   title: Scalars['String'];
   updated_at: Scalars['timestamptz'];
+};
+
+
+/** columns and relationships of "todo" */
+export type TodoCommentsArgs = {
+  distinct_on?: Maybe<Array<Comments_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Comments_Order_By>>;
+  where?: Maybe<Comments_Bool_Exp>;
 };
 
 /** input type for inserting array relation for remote table "todo" */
@@ -205,6 +424,7 @@ export type Todo_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Todo_Bool_Exp>>>;
   _not?: Maybe<Todo_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Todo_Bool_Exp>>>;
+  comments?: Maybe<Comments_Bool_Exp>;
   complete?: Maybe<Boolean_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
@@ -221,6 +441,7 @@ export enum Todo_Constraint {
 
 /** input type for inserting data into table "todo" */
 export type Todo_Insert_Input = {
+  comments?: Maybe<Comments_Arr_Rel_Insert_Input>;
   complete?: Maybe<Scalars['Boolean']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
@@ -314,6 +535,19 @@ export type Uuid_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['uuid']>>;
 };
 
+export type CreateCommentMutationVariables = Exact<{
+  comment: Comments_Insert_Input;
+}>;
+
+
+export type CreateCommentMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_comments_one?: Maybe<(
+    { __typename?: 'comments' }
+    & Pick<Comments, 'id' | 'todo_id' | 'comment'>
+  )> }
+);
+
 export type CreateToDoMutationVariables = Exact<{
   todo: Todo_Insert_Input;
 }>;
@@ -371,6 +605,19 @@ export type SingleToDoQuery = (
   )> }
 );
 
+export type TodoCommentsSubscriptionVariables = Exact<{
+  todoId: Scalars['uuid'];
+}>;
+
+
+export type TodoCommentsSubscription = (
+  { __typename?: 'subscription_root' }
+  & { comments: Array<(
+    { __typename?: 'comments' }
+    & Pick<Comments, 'id' | 'comment' | 'todo_id'>
+  )> }
+);
+
 export type ToDoListSubscriptionVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -386,6 +633,40 @@ export type ToDoListSubscription = (
 );
 
 
+export const CreateCommentDocument = gql`
+    mutation CreateComment($comment: comments_insert_input!) {
+  insert_comments_one(object: $comment) {
+    id
+    todo_id
+    comment
+  }
+}
+    `;
+export type CreateCommentMutationFn = ApolloReactCommon.MutationFunction<CreateCommentMutation, CreateCommentMutationVariables>;
+
+/**
+ * __useCreateCommentMutation__
+ *
+ * To run a mutation, you first call `useCreateCommentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCommentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCommentMutation, { data, loading, error }] = useCreateCommentMutation({
+ *   variables: {
+ *      comment: // value for 'comment'
+ *   },
+ * });
+ */
+export function useCreateCommentMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateCommentMutation, CreateCommentMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateCommentMutation, CreateCommentMutationVariables>(CreateCommentDocument, baseOptions);
+      }
+export type CreateCommentMutationHookResult = ReturnType<typeof useCreateCommentMutation>;
+export type CreateCommentMutationResult = ApolloReactCommon.MutationResult<CreateCommentMutation>;
+export type CreateCommentMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateCommentMutation, CreateCommentMutationVariables>;
 export const CreateToDoDocument = gql`
     mutation CreateToDo($todo: todo_insert_input!) {
   insert_todo(objects: [$todo]) {
@@ -488,7 +769,7 @@ export type UpdateToDoMutationHookResult = ReturnType<typeof useUpdateToDoMutati
 export type UpdateToDoMutationResult = ApolloReactCommon.MutationResult<UpdateToDoMutation>;
 export type UpdateToDoMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateToDoMutation, UpdateToDoMutationVariables>;
 export const SingleToDoDocument = gql`
-    query singleToDo($id: uuid!) {
+    query SingleToDo($id: uuid!) {
   todo_by_pk(id: $id) {
     id
     title
@@ -525,6 +806,37 @@ export function useSingleToDoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
 export type SingleToDoQueryHookResult = ReturnType<typeof useSingleToDoQuery>;
 export type SingleToDoLazyQueryHookResult = ReturnType<typeof useSingleToDoLazyQuery>;
 export type SingleToDoQueryResult = ApolloReactCommon.QueryResult<SingleToDoQuery, SingleToDoQueryVariables>;
+export const TodoCommentsDocument = gql`
+    subscription TodoComments($todoId: uuid!) {
+  comments(where: {todo_id: {_eq: $todoId}}) {
+    id
+    comment
+    todo_id
+  }
+}
+    `;
+
+/**
+ * __useTodoCommentsSubscription__
+ *
+ * To run a query within a React component, call `useTodoCommentsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useTodoCommentsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTodoCommentsSubscription({
+ *   variables: {
+ *      todoId: // value for 'todoId'
+ *   },
+ * });
+ */
+export function useTodoCommentsSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<TodoCommentsSubscription, TodoCommentsSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<TodoCommentsSubscription, TodoCommentsSubscriptionVariables>(TodoCommentsDocument, baseOptions);
+      }
+export type TodoCommentsSubscriptionHookResult = ReturnType<typeof useTodoCommentsSubscription>;
+export type TodoCommentsSubscriptionResult = ApolloReactCommon.SubscriptionResult<TodoCommentsSubscription>;
 export const ToDoListDocument = gql`
     subscription ToDoList($limit: Int, $offset: Int) {
   todo(order_by: {created_at: desc}, limit: $limit, offset: $offset) {

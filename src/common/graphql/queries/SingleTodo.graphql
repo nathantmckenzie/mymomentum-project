@@ -1,4 +1,4 @@
-query singleToDo($id: uuid!) {
+query SingleToDo($id: uuid!) {
     todo_by_pk(id: $id){
         id,
         title,

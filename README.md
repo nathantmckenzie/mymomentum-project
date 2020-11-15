@@ -29,10 +29,13 @@ To get the project up and running, do the following:
 
 ## Development
 
-Watch your code changes and generate Apollo hooks: 
+For the most part, you should just be able to work in React. If, however, you're feeling more adventurous, take a look at the following video and use these commands.
+
+Watch your GraphQL code changes and generate Apollo hooks: 
 `yarn gql-generate --watch`
 
 Use the Hasura console to change the database/GraphQL API:
+- Install the [Hasura CLI](https://hasura.io/docs/1.0/graphql/core/hasura-cli/install-hasura-cli.html)
 - `cd hasura`
 - `hasura console --access-key password`
 

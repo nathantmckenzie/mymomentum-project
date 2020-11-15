@@ -36,6 +36,10 @@ const ToDos = () => {
         {data?.todo.map(todo => (
           <Todo todo={todo} />
         ))}
+        <Grid item>
+          <hr/>
+          Pagination? Autoload more?
+        </Grid>
       </Grid>
     </>
   )
