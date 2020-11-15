@@ -31,17 +31,19 @@ To get the project up and running, do the following:
 
 For the most part, you should just be able to work in React. Here's a quick overview of what you might want to look at:
 
-
+<!-- blank line -->
 <figure class="video_container">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/_6r900fmMGI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/_6r900fmMGI" frameborder="0" allowfullscreen="true"> </iframe>
 </figure>
-
+<!-- blank line -->
 
 If, however, you're feeling more adventurous, take a look at the following video and use the commands below.
 
+<!-- blank line -->
 <figure class="video_container">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/-6yJGwgKCEI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/-6yJGwgKCEI" frameborder="0" allowfullscreen="true"> </iframe>
 </figure>
+<!-- blank line -->
 
 Watch your GraphQL code changes and generate Apollo hooks: 
 `yarn gql-generate --watch`
