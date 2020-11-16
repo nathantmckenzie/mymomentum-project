@@ -22,11 +22,11 @@ The project is pretty open-ended: we would like you to spend _no more than 2-3 h
 - The ToDo object has a "Description" field that isn't used in the sample. You could work on input and display of the description.
 - Anything else you can think of!
 
-For the most part, you should just be able to work in React. Here's a quick overview of what you might want to look at the following YouTube video:
+For the most part, you should just be able to work in React. Here's a quick overview of how the project works and what you can build on top of it:
 
 https://www.youtube.com/embed/_6r900fmMGI
 
-If, however, you're feeling more adventurous, take a look at the following video and use the commands below.
+If, however, you're feeling more adventurous and want to modify the GraphQL API or add more Apollo hooks, take a look at the following video and use the commands below in the Advanced Development section:
 
 https://www.youtube.com/embed/-6yJGwgKCEI
 
