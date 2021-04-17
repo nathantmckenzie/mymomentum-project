@@ -9,6 +9,7 @@ import {
 import {useRouter} from "next/router";
 import Head from "next/head";
 import {Grid} from "@material-ui/core";
+import Description from '../Todos/components/Description';
 
 
 /**
@@ -39,6 +40,7 @@ const Todo = memo(() => {
       <Grid container direction="column" spacing={2}>
         <Grid item>
           <Title>{todo ? todo.title : null}</Title>
+          {todo ? <Description todo={todo} /> : null }
         </Grid>
       </Grid>
     </>
