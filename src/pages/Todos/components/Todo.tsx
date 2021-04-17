@@ -13,6 +13,11 @@ interface TodoProps {
 const useStyles = makeStyles({
   link: {
     cursor: 'pointer'
+  },
+
+  todoWrapper: {
+    display: "flex",
+    justifyContent: "space-Between"
   }
 });
 
@@ -33,7 +38,7 @@ export const Todo = memo(({
   return (
     <Grid item key={todo.id}>
         <Paper elevation={1} className={classes.link}>
-          <Box p={2}>
+          <Box p={2} className={classes.todoWrapper}>
           <Link href={`/todo/${todo.id}`}>
             <Typography variant="h5">{todo.title}</Typography>
           </Link>
