@@ -33,11 +33,12 @@ const Todo = memo(() => {
   return (
     <>
       <Head>
-        <title>A ToDo</title>
+        <title>A Todo</title>
+        {console.log("12:35", todo)}
       </Head>
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <Title>A ToDo</Title>
+          <Title>{todo ? todo.title : null}</Title>
         </Grid>
       </Grid>
     </>
