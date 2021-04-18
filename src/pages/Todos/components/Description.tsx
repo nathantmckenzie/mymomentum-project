@@ -4,61 +4,55 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+    margin: theme.spacing(1),
+    },
+  },
+  descriptionContainer: {
+    display: "flex",
+    marginTop: "20px"
+  },
+  submitButton: {
+    marginLeft: "30px"
+  },
+  description: {
+    marginTop: "30px"
+  }
+}));
+
 export default function Description({ todo }) {
-    const [input, setInput] = useState("");
-    const [description, setDescription] = useState(todo.description);
+  const [input, setInput] = useState("");
+  const [description, setDescription] = useState(todo.description);
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-          '& > *': {
-            margin: theme.spacing(1),
-          },
-        },
-        descriptionContainer: {
-          display: "flex",
-          marginTop: "20px"
-        },
-        submitButton: {
-          marginLeft: "30px"
-        },
-        description: {
-          marginTop: "30px"
-        }
-      }));
+  const classes = useStyles();
 
-    const classes = useStyles();
-
-    const [updateToDoMutation, { data, loading, error }] = useUpdateToDoMutation({
-        variables: {
-          id: todo.id,
-          todo: {
-            description: input
-          }
-        }
-      });
-    
-    const onClick = () => {
-       updateToDoMutation();
-       
-       setInput("")
-
-       window.location.reload();
+  const [updateToDoMutation, { data, loading, error }] = useUpdateToDoMutation({
+    variables: {
+      id: todo.id,
+      todo: {
+      description: input
+      }
     }
+    });
+  
+  const onClick = () => {
+    updateToDoMutation().then(() => setDescription(input));
 
-    useEffect(() => {
-      setDescription(todo.description)
-    }, [todo.description])
+    setInput("")
+  }
 
-    return (
-        <div>
-          <div className={classes.descriptionContainer} >
-            <TextField value={input} onChange={(e) => setInput(e.target.value)} label="Add Description" />
-            <Button className={classes.submitButton} variant="contained" onClick={onClick}>Submit</Button>
-          </div>
-          <br />
-          <div className={classes.description}>
-          Description: {description}
-          </div>
-        </div>
-    )
+  return (
+    <div>
+      <div className={classes.descriptionContainer} >
+        <TextField value={input} onChange={(e) => setInput(e.target.value)} label="Add Description" />
+        <Button className={classes.submitButton} variant="contained" onClick={onClick}>Submit</Button>
+      </div>
+      <br />
+      <div className={classes.description}>
+        Description: {description}
+      </div>
+    </div>
+  )
 }

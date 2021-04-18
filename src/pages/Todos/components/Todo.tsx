@@ -44,13 +44,9 @@ export const Todo = memo(({
    }
   });
 
-
   useEffect(() => {
     updateToDoMutation();
   }, [checked]);
-
-
-
 
   return (
     <Grid item key={todo.id}>
