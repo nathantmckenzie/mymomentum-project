@@ -54,19 +54,22 @@ export const Todo = memo(({
 
   return (
     <Grid item key={todo.id}>
-        <Paper elevation={1} className={classes.link}>
-          <Box p={2} className={classes.todoWrapper}>
-          <Link href={`/todo/${todo.id}`}>
-            <Typography variant="h5">{todo.title}</Typography>
-          </Link>
-          <Checkbox
-            checked={checked}
-            disabled={loading}
-            onChange={handleChange}
-            inputProps={{ 'aria-label': 'primary checkbox' }}
-          />
-          </Box>
-        </Paper>
+      <Link href={`/todo/${todo.id}`}>
+        <a>
+          <Paper elevation={1} className={classes.link}>
+            <Box p={2} className={classes.todoWrapper}>
+              <Typography variant="h5">{todo.title}</Typography>
+              <Checkbox
+                checked={checked}
+                disabled={loading}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+                inputProps={{ 'aria-label': 'primary checkbox' }}
+              />
+            </Box>
+          </Paper>
+        </a>
+      </Link>
     </Grid>
   )
 });
