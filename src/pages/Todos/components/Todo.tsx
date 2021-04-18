@@ -1,6 +1,7 @@
 import {Box, Grid, Paper, Typography} from "@material-ui/core";
 import {Todo as TodoType} from "../../../generated/graphql";
-import {memo, useState} from "react";
+import {useUpdateToDoMutation} from "../../../generated/graphql";
+import {memo, useState, useEffect} from "react";
 import Link from "next/link";
 import {makeStyles} from "@material-ui/styles";
 import Checkbox from '@material-ui/core/Checkbox';
@@ -28,10 +29,26 @@ export const Todo = memo(({
   todo
 }: TodoProps) => {
   const classes = useStyles();
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(todo.complete ? true : false);
+
   const handleChange = (event) => {
-    setChecked(event.target.checked);
+    setChecked(!checked);
   };
+
+  const [updateToDoMutation, { data, loading, error }] = useUpdateToDoMutation({
+   variables: {
+     id: todo.id,
+     todo: {
+       complete: checked
+     }
+   }
+  });
+
+
+  useEffect(() => {
+    updateToDoMutation();
+  }, [checked]);
+
 
 
 
@@ -44,6 +61,7 @@ export const Todo = memo(({
           </Link>
           <Checkbox
             checked={checked}
+            disabled={loading}
             onChange={handleChange}
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />

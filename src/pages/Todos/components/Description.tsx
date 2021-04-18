@@ -37,7 +37,7 @@ export default function Description({ todo }) {
         }
       });
     
-    const onSubmit = () => {
+    const onClick = () => {
        updateToDoMutation();
        
        setInput("")
@@ -53,7 +53,7 @@ export default function Description({ todo }) {
         <div>
           <div className={classes.descriptionContainer} >
             <TextField value={input} onChange={(e) => setInput(e.target.value)} label="Add Description" />
-            <Button className={classes.submitButton} variant="contained" onClick={onSubmit}>Submit</Button>
+            <Button className={classes.submitButton} variant="contained" onClick={onClick}>Submit</Button>
           </div>
           <br />
           <div className={classes.description}>

@@ -34,6 +34,7 @@ const ToDos = () => {
         <Grid item>
           <TodoForm />
         </Grid>
+        {console.log("data", data)}
         {data?.todo.map(todo => (
           <Todo todo={todo} />
         ))}

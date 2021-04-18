@@ -35,7 +35,6 @@ const Todo = memo(() => {
     <>
       <Head>
         <title>A Todo</title>
-        {console.log("12:35", todo)}
       </Head>
       <Grid container direction="column" spacing={2}>
         <Grid item>
